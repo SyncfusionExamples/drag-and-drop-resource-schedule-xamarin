@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ScheduleXamarin"
+             x:Class="ScheduleXamarin.MainPage"
+             xmlns:syncfusion="clr-namespace:Syncfusion.SfSchedule.XForms;assembly=Syncfusion.SfSchedule.XForms">
+
+    <ContentPage.Content>
+        <syncfusion:SfSchedule
+                        x:Name="schedule"
+                        AllowAppointmentDrag="true"
+                        ScheduleView="TimelineView" 
+                        DataSource="{Binding Events}"
+                        ScheduleResources="{Binding Employees}"
+                        SelectedResources="{Binding SelectedEmployees}"
+                        ShowResourceView="True"
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="FillAndExpand"
+                        ResourceViewMode="Absolute">
+            <syncfusion:SfSchedule.ResourceMapping>
+                <syncfusion:ResourceMapping Name="Name"
+                                            Id="Id"
+                                            Color="Color"
+                                            Image="DisplayPicture"/>
+            </syncfusion:SfSchedule.ResourceMapping>
+
+            <syncfusion:SfSchedule.AppointmentMapping>
+                <syncfusion:ScheduleAppointmentMapping
+                        ColorMapping="Color"
+                        EndTimeMapping="To"
+                        IsAllDayMapping="IsAllDay"
+                        StartTimeMapping="From"
+                        SubjectMapping="EventName"
+                        MinHeightMapping="MinimumHeight"
+                        StartTimeZoneMapping="StartTimeZone"
+                        EndTimeZoneMapping="EndTimeZone"
+                        ResourceIdsMapping="Resources"/>
+            </syncfusion:SfSchedule.AppointmentMapping>
+            <syncfusion:SfSchedule.BindingContext>
+                <local:SchedulerViewModel/>
+            </syncfusion:SfSchedule.BindingContext>
+        </syncfusion:SfSchedule>
+    </ContentPage.Content>
+    <ContentPage.Behaviors>
+        <local:SchedulerPageBehavior/>
+    </ContentPage.Behaviors>
+</ContentPage>
